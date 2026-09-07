@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="style.css" />
+  <!-- No script in head, it goes at the bottom of body so the DOM elements it references already exist when it runs -->
+</head>
+<body>
+  <div id="widget">
+    <!-- SVG ring: two circles stacked on top of each other
+         "track" = dim full circle always visible 
+         "progress" = colored circle whose visible portion we animate in renderer.js -->
+    <svg id="timer-ring" width="120" height="120" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="90" class="track" />
+      <circle cx="100" cy="100" r="90" class="progress" id="progress-circle" />
+    </svg>
+ 
+    <div id="time-label">5:00</div> <!-- digital fallback readout -->
+ 
+    <div id="controls">
+      <button id="start-btn">Start</button>
+      <button id="pause-btn">Pause</button>
+      <button id="reset-btn">Reset</button>
+    </div>
+  </div>
+ 
+  <!-- loaded last so document.getElementById calls inside it succeed -->
+  <script src="renders.js"></script>
+</body>
+</html>

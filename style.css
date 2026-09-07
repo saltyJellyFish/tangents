@@ -1,0 +1,27 @@
+body {
+  color: rgba(230, 230, 230, 0.868);
+  background: transparent;
+  text-align: center;
+  -webkit-app-region: drag; /* makes clicking+dragging ANY part of the body move the whole frameless window */
+  user-select: none;
+}
+
+button, input {
+  -webkit-app-region: no-drag;
+}
+
+
+
+.progress {
+  fill: none;
+  stroke: #7d9887; 
+  stroke-width: 12;
+  stroke-linecap: round;
+  transform: rotate(-90deg);/* SVG circles start drawing at 3 o'clock by default; this rotates the start to 12 o'clock */
+  transform-origin: 100px 100px;  /* rotate around the circle's own center, not the SVG's corner */
+  transition: stroke-dashoffset 1s linear, stroke 0.5s;
+  margin-bottom: auto;
+}
+
+
+

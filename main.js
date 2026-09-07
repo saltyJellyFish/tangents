@@ -1,5 +1,5 @@
 // main.js — the "backend" of the app. Runs in Node, has full OS access. (ONLY file allowed to touch real OS features (windows, taskbar).)
-// The UI (renderer.js) is sandboxed and can't reach any of this directly, that's why preload.js exists as the narrow, safe bridge between the two.
+// The UI (renderer.js) is sandboxed and can't reach any of this directly, that's why preload exists as a safe bridge between the two.
 
 const { app, BrowserWindow, ipcMain, screen } = require('electron');
 
@@ -7,8 +7,7 @@ let win; // keep a reference so it isn't garbage-collected while open
 
 function createWindow() {
   win = new BrowserWindow({
-    width: 200,
-    height: 200,
+    width: 200, height: 280,
     frame: false,
     transparent: true,
     backgroundColor: '#00000000', // WHY? some Windows setups render a white flash without this explicit transparent hex
@@ -23,7 +22,7 @@ function createWindow() {
 
   win.loadFile('index.html');
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
-  win.setPosition(width - 220, height - 260);
+  win.setPosition(width - 220, height - 220);
 }
 
 app.whenReady().then(createWindow); // Electron APIs aren't safe to call until this fires!

@@ -1,27 +1,168 @@
-body {
-  color: rgba(230, 230, 230, 0.868);
-  background: transparent;
+body { 
+  margin: 0; 
+  background: transparent; /* lets the transparent:true window setting actually show the desktop through */ 
+  font-family: system-ui, sans-serif; 
+  color: rgba(230, 230, 230, 0.868); 
+  text-align: center; 
+  -webkit-app-region: drag; /* click/drag anywhere on body move the whole window */ 
+  user-select: none; /* stops text getting highlighted when you drag */ 
+} 
+ 
+/* Anything the user needs to click must opt OUT of the drag region, or clicks get swallowed by "start dragging the window" instead. */ 
+button, input { 
+  -webkit-app-region: no-drag; 
+} 
+ 
+#widget {
+  width: 200px;
+  padding: 4px 0 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+/* --- ghost task input: near-invisible at rest, appears on focus --- */
+.ghost {
+  background: none;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: rgba(230, 230, 230, 0.45);
+  font-size: 12px;
   text-align: center;
-  -webkit-app-region: drag; /* makes clicking+dragging ANY part of the body move the whole frameless window */
-  user-select: none;
+  width: 150px;
+  padding: 2px 0;
+  transition: border-color .2s, color .2s;
 }
-
-button, input {
-  -webkit-app-region: no-drag;
+.ghost:focus {
+  outline: none;
+  border-bottom-color: rgba(230, 230, 230, 0.45);
+  color: rgba(230, 230, 230, 0.92);
 }
-
-
-
-.progress {
+ 
+#ring-wrap {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: rgba(18, 20, 18, 0.55);
+  backdrop-filter: blur(6px);       /* softens whatever's on your desktop behind it, for legibility */
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.04) inset;
+}
+ 
+#timer-ring { position: absolute; inset: 0; }
+.track { 
+  fill: none; 
+  stroke: rgba(255, 255, 255, 0.09); /* dim background ring, always fully visible */ 
+  stroke-width: 12; 
+  text-align: center;
+} 
+.progress { 
   fill: none;
   stroke: #7d9887; 
-  stroke-width: 12;
-  stroke-linecap: round;
-  transform: rotate(-90deg);/* SVG circles start drawing at 3 o'clock by default; this rotates the start to 12 o'clock */
-  transform-origin: 100px 100px;  /* rotate around the circle's own center, not the SVG's corner */
+  stroke-width: 12; 
+  stroke-linecap: round; 
+  transform: rotate(-90deg);       /* SVG circles start drawing at 3 o'clock by default; this rotates the start to 12 o'clock */ 
+  transform-origin: 100px 100px;   /* rotate around the circle's own center, not the SVG's corner */ 
   transition: stroke-dashoffset 1s linear, stroke 0.5s;
-  margin-bottom: auto;
+} 
+
+#time-display {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+ 
+#time-label {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; 
+  font-size: 35px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums; /* digits don't jitter width as they change */
+  cursor: text;
+  border-bottom: 1px dashed transparent; /* invisible hint that this is editable */
+}
+#time-label:hover, #time-label:focus {
+  border-bottom-color: rgba(230, 230, 230, 0.45); /* only reveals the "you can edit this" affordance on hover/focus */
+  outline: none;
+}
+ 
+#time-edit {
+  display: none; 
+  width: 80px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 26px;
+  font-weight: 600;
+  text-align: center;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(230, 230, 230, 0.45);
+  color: rgba(230, 230, 230, 0.92);
+}
+#time-edit:focus { outline: none; }
+ 
+.editing #time-label { display: none; }
+.editing #time-edit { display: inline-block; }
+ 
+/* --- controls: dim at rest, brighten on hover/focus so the widget stays quiet most of the time --- */
+#controls {
+  display: flex;
+  gap: 10px;
+  opacity: .4;
+  transition: opacity .25s;
+}
+#widget:hover #controls, #widget:focus-within #controls {
+  opacity: 1;
+}
+ 
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(230, 230, 230, 0.861);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform .12s, background .2s;
+}
+.icon-btn:hover { background: rgba(255, 255, 255, 0.12); transform: scale(1.25)}
+.icon-btn:active { transform: scale(.88); } 
+.icon-btn svg { width: 40px; height: 40px; }
+ 
+.icon-btn.primary {
+  width: 40px;
+  height: 40px;
+  background: #7d9887ae;
+  color: #12140fdd;
+}
+.icon-btn.primary:hover { filter: brightness(1.08); }
+ 
+#start-pause-btn { position: relative; }
+#start-pause-btn svg {
+  position: absolute;
+  transition: opacity .2s, transform .2s;
+}
+.icon-play  { opacity: 1; transform: scale(0.9)  rotate(0deg);}
+.icon-pause { opacity: 0; transform: scale(.5) rotate(-90deg);}
 
-
-
+body.is-running .icon-play  { opacity: 0; transform: scale(.4) rotate(90deg); }
+body.is-running .icon-pause { opacity: 1; transform: scale(1)  rotate(0deg); }
+ 
+.icon-reset { transition: transform .3s;}
+.icon-btn.spin .icon-reset { transform: rotate(-360deg); transform: scale(1)}
+ 
+/* --- one orchestrated "session complete" moment, not a looping effect --- */
+@keyframes completePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(224, 133, 133, .5); }
+  70%  { box-shadow: 0 0 0 12px rgba(224, 133, 133, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(224, 133, 133, 0); }
+}
+#ring-wrap.complete { animation: completePulse 1s ease-out 3;}
+ 
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+ 

@@ -5,23 +5,38 @@
   <!-- No script in head, it goes at the bottom of body so the DOM elements it references already exist when it runs -->
 </head>
 <body>
-  <div id="widget">
-    <!-- SVG ring: two circles stacked on top of each other
-         "track" = dim full circle always visible 
-         "progress" = colored circle whose visible portion we animate in renderer.js -->
-    <svg id="timer-ring" width="120" height="120" viewBox="0 0 200 200">
-      <circle cx="100" cy="100" r="90" class="track" />
-      <circle cx="100" cy="100" r="90" class="progress" id="progress-circle" />
-    </svg>
- 
-    <div id="time-label">5:00</div> <!-- digital fallback readout -->
- 
-    <div id="controls">
-      <button id="start-btn">Start</button>
-      <button id="pause-btn">Pause</button>
-      <button id="reset-btn">Reset</button>
+    <div id="widget">
+        <!-- "ghost" input: near-invisible until focused, so it doesn't compete with the ring at rest -->
+        <input id="task-input" class="ghost" placeholder="Focusing on…" />
+        <div id="ring-wrap">
+            <!-- SVG ring: two circles stacked on top of each other
+            "track" = dim full circle always visible 
+            "progress" = colored circle whose visible portion we animate in renderer.js -->
+            <svg id="timer-ring" viewBox="0 0 200 200">
+                <circle class="track" cx="100" cy="100" r="90" />
+                <circle class="progress" id="progress-circle" cx="100" cy="100" r="90" />
+            </svg>
+    
+            <div id="time-display">
+                <span id="time-label" tabindex="0" role="button" aria-label="Click to set duration"></span>
+                <input id="time-edit" type="text" inputmode="numeric" maxlength="5" aria-label="Enter minutes, or mm:ss" />
+            </div>
+        </div>
+    
+        <div id="controls"> 
+            <button id="reset-btn" class="icon-btn" aria-label="Reset"> 
+                <svg viewBox="0 0 25 25" class="icon-reset">
+                    <path d="M21 12a9 9 0 1 1-3-6.7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <path d="M21 3v6h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+    
+            <button id="start-pause-btn" class="icon-btn primary" aria-label="Start">
+                <svg class="icon-play" viewBox="0 0 25 25"><path d="M7 5v14l12-7z" fill="currentColor" /></svg>
+                <svg class="icon-pause" viewBox="0 0 25 25"><path d="M7 5h4v14H7zM13 5h4v14h-4z" fill="currentColor" /></svg>
+            </button>
+        </div>
     </div>
-  </div>
  
   <!-- loaded last so document.getElementById calls inside it succeed -->
   <script src="renders.js"></script>

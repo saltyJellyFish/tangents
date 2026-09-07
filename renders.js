@@ -26,7 +26,7 @@ function render() {
   const offset = circumference * (1 - percentLeft);
   circle.style.strokeDashoffset = offset;
 
-  if (percentLeft > 0.5) circle.style.stroke = '#a8cbb5';       // green: plenty of time
+  if (percentLeft > 0.5) circle.style.stroke = '#94b7a1e7';       // green: plenty of time
   else if (percentLeft > 0.2) circle.style.stroke = '#dfd094';  // yellow: getting close
   else circle.style.stroke = '#f87171';                         // red: almost out
 
@@ -85,7 +85,7 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// click-to-edit time accepts "25" (minutes) or "25:30" (mm:ss). Clamped to 1–180 minutes to forgive typos
+// click-to-edit time accepts "5" (minutes) or "5:30" (mm:ss). Clamped to 1–180 minutes to forgive typos
 function parseTimeInput(str) {
   str = str.trim();
   if (str.includes(':')) {
@@ -106,7 +106,6 @@ function enterEdit() {
   widget.classList.add('editing'); // CSS swaps time-label out for time-edit
   timeEdit.value = Math.round(totalSeconds / 60);
   timeEdit.focus();
-  timeEdit.select();
 }
  
 function exitEdit(commit) {

@@ -22,7 +22,7 @@ function createWindow() {
 
   win.loadFile('index.html');
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
-  win.setPosition(width - 220, height - 220);
+  win.setPosition(width - 220, height - 300);
 }
 
 app.whenReady().then(createWindow); // Electron APIs aren't safe to call until this fires!

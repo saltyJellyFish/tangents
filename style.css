@@ -2,7 +2,7 @@ body {
   margin: 0; 
   background: transparent; /* lets the transparent:true window setting actually show the desktop through */ 
   font-family: system-ui, sans-serif; 
-  color: rgba(230, 230, 230, 0.868); 
+  color: rgba(218, 215, 215, 0.867); 
   text-align: center; 
   -webkit-app-region: drag; /* click/drag anywhere on body move the whole window */ 
   user-select: none; /* stops text getting highlighted when you drag */ 
@@ -26,8 +26,8 @@ button, input {
   background: none;
   border: none;
   border-bottom: 1px solid transparent;
-  color: rgba(230, 230, 230, 0.45);
-  font-size: 12px;
+  color: rgba(225, 222, 222, 0.817);
+  font-size: 15px;
   text-align: center;
   width: 150px;
   padding: 2px 0;
@@ -36,7 +36,7 @@ button, input {
 .ghost:focus {
   outline: none;
   border-bottom-color: rgba(230, 230, 230, 0.45);
-  color: rgba(230, 230, 230, 0.92);
+  color: rgba(229, 223, 223, 0.92);
 }
  
 #ring-wrap {
@@ -58,7 +58,7 @@ button, input {
 } 
 .progress { 
   fill: none;
-  stroke: #7d9887; 
+  stroke: #94b7a1db; 
   stroke-width: 12; 
   stroke-linecap: round; 
   transform: rotate(-90deg);       /* SVG circles start drawing at 3 o'clock by default; this rotates the start to 12 o'clock */ 
@@ -77,29 +77,25 @@ button, input {
 #time-label {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace; 
   font-size: 35px;
-  font-weight: 600;
+  font-weight: 500;
   font-variant-numeric: tabular-nums; /* digits don't jitter width as they change */
   cursor: text;
   border-bottom: 1px dashed transparent; /* invisible hint that this is editable */
+  -webkit-app-region: no-drag; /* so you can click to edit without dragging the window */
 }
-#time-label:hover, #time-label:focus {
-  border-bottom-color: rgba(230, 230, 230, 0.45); /* only reveals the "you can edit this" affordance on hover/focus */
-  outline: none;
-}
- 
+
 #time-edit {
   display: none; 
-  width: 80px;
+  width: 50px;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 26px;
-  font-weight: 600;
+  font-size: 35px;
   text-align: center;
   background: none;
   border: none;
   border-bottom: 1px solid rgba(230, 230, 230, 0.45);
   color: rgba(230, 230, 230, 0.92);
 }
-#time-edit:focus { outline: none; }
+#time-edit:focus { outline: none;}
  
 .editing #time-label { display: none; }
 .editing #time-edit { display: inline-block; }
@@ -135,15 +131,15 @@ button, input {
 .icon-btn.primary {
   width: 40px;
   height: 40px;
-  background: #7d9887ae;
-  color: #12140fdd;
+  background: #94b7a1;
+  color: #12140fc8;
 }
 .icon-btn.primary:hover { filter: brightness(1.08); }
  
 #start-pause-btn { position: relative; }
 #start-pause-btn svg {
   position: absolute;
-  transition: opacity .2s, transform .2s;
+  transition: opacity .2s, transform .3s;
 }
 .icon-play  { opacity: 1; transform: scale(0.9)  rotate(0deg);}
 .icon-pause { opacity: 0; transform: scale(.5) rotate(-90deg);}
@@ -152,7 +148,7 @@ body.is-running .icon-play  { opacity: 0; transform: scale(.4) rotate(90deg); }
 body.is-running .icon-pause { opacity: 1; transform: scale(1)  rotate(0deg); }
  
 .icon-reset { transition: transform .3s;}
-.icon-btn.spin .icon-reset { transform: rotate(-360deg); transform: scale(1)}
+.icon-btn.spin .icon-reset { transform: rotate(-360deg);}
  
 /* --- one orchestrated "session complete" moment, not a looping effect --- */
 @keyframes completePulse {

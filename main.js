@@ -15,8 +15,8 @@ function createWindow() {
     resizable: true,
     skipTaskbar: false, //we need the taskbar icon to exist so setProgressBar() has something to draw on
     webPreferences: {
-      preload: __dirname + '/preload.js', //absolute path required, or Electron silently fails to load it
-      contextIsolation: true,  //security setting to keep the UI's JS world separate from Node's, preload is the only bridge
+      preload: __dirname + '/preload.js', // absolute path required, or Electron silently fails to load it
+      contextIsolation: true, //security setting to keep the UI's JS world separate from Node's, preload is the only bridge
     },
   });
 

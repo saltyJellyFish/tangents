@@ -27,7 +27,7 @@
         <div id="ring-wrap">
             <!-- SVG ring: two circles stacked on top of each other
             "track" = dim full circle always visible 
-            "progress" = colored circle whose visible portion we animate in renderer.js -->
+            "progress" = colored circle whose visible portion we animate in renders.js -->
             <svg id="timer-ring" viewBox="0 0 200 200">
                 <circle class="track" cx="100" cy="100" r="90" />
                 <circle class="progress" id="progress-circle" cx="100" cy="100" r="90" />
@@ -57,7 +57,7 @@
     </div>
  
   <!-- loaded last so document.getElementById calls inside it succeed. FIXED: was pointing at "renders.js" which doesn't exist — the whole script silently failed to load -->
-  <script src="renderer.js"></script>
+  <script src="renders.js"></script>
 </body>
 </html>
  

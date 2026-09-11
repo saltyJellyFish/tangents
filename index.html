@@ -7,8 +7,23 @@
 </head>
 <body>
     <div id="widget">
-        <!-- "ghost" input: near-invisible until focused, so it doesn't compete with the ring at rest -->
+        <!-- "ghost" input: near-invisible until focused, adds a task to the queue on Enter -->
         <input id="task-input" class="ghost" placeholder="Focusing on…" />
+         <!-- current (top-of-queue) task name + chevron toggle to open the full queue panel -->
+        <div id="current-task-row">
+          <span id="current-task" tabindex="0" role="button" aria-expanded="false">No task selected</span>
+          <button id="queue-toggle" class="chevron-btn" aria-label="Show task queue" aria-expanded="false">
+            <svg viewBox="0 0 24 24" class="icon-chevron">
+              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+ 
+        <!-- collapsible queue panel — absolutely positioned so it overlays the ring instead of resizing the layout -->
+        <div id="queue-panel">
+          <ul id="queue-list"></ul>
+        </div>
+
         <div id="ring-wrap">
             <!-- SVG ring: two circles stacked on top of each other
             "track" = dim full circle always visible 
@@ -23,6 +38,8 @@
                 <input id="time-edit" type="text" inputmode="numeric" maxlength="5" aria-label="Enter minutes, or mm:ss" />
             </div>
         </div>
+    
+         <ul id="subtask-checklist"></ul>
     
         <div id="controls"> 
             <button id="reset-btn" class="icon-btn" aria-label="Reset"> 
@@ -39,7 +56,8 @@
         </div>
     </div>
  
-  <!-- loaded last so document.getElementById calls inside it succeed -->
-  <script src="renders.js"></script>
+  <!-- loaded last so document.getElementById calls inside it succeed. FIXED: was pointing at "renders.js" which doesn't exist — the whole script silently failed to load -->
+  <script src="renderer.js"></script>
 </body>
 </html>
+ 

@@ -44,7 +44,7 @@ button, input {
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  background: rgba(18, 20, 18, 0.55);
+  background: rgba(18, 20, 18, 0.4);
   backdrop-filter: blur(6px);       /* softens whatever's on your desktop behind it, for legibility */
   box-shadow: 0 0 0 1px rgba(255,255,255,0.04) inset;
 }

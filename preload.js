@@ -6,4 +6,6 @@ const {contextBridge, ipcRenderer} = require('electron');
 contextBridge.exposeInMainWorld('electronAPI', {//renders.js will call window.electronAPI.updateProgress(0.42) etc.
   updateProgress: (percent) => ipcRenderer.send('update-progress', percent),
   clearProgress: () => ipcRenderer.send('clear-progress'),
+  resizeForTasks: (expand) => ipcRenderer.send('resize-for-tasks', expand), // ask main.js to grow/shrink the window when editing tasks
+
 });

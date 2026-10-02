@@ -1,8 +1,20 @@
-{
+{ //manifest.jsonc- configuration file for the browser extension
   "manifest_version": 3,
   "name": "Highlighter",
   "version": "1.0.0",
   "description": "Highlights",
-  "permissions": ["storage", "activeTab", "scripting"],
-  "host_permissions": ["<all_urls>"]
+  "permissions": ["storage", "activeTab", "scripting"], //permissions to use certain extension APIs.   //scripting allows the extension to use Chrome's scripting functionality, such as injecting JavaScript into webpages.
+  "host_permissions": ["<all_urls>"], //lets content script run on every site 
+  "run_at": "document_idle", //waits until page's initial DOM is ready before running script so it doesn't restore highlights prematurely 
+  "background": {"service_worker": "service_worker.js"}, //background script that runs in the background and listens for/ responds to events, such as when the extension is installed or when a user clicks on the extension icon. 
+  "content_scripts": [{//automatically put some JavaScript/CSS into webpages
+      "matches": ["<all_urls>"],
+      "js": ["content.js"], //Logic that can interact directly with the webpage's DOM
+      "css": ["content.css"],
+      "run_at": "document_idle" }],
+  "icons": {//placeholder pngs for extension's logo images
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"}
+
 } 

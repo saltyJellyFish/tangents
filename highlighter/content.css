@@ -5,11 +5,36 @@
   padding: 4px 8px;
   color: #333;
   transition: all 0.2s ease;
+position: absolute;
+  z-index: 999999; /* needs to sit above whatever the page itself uses */
+  background: #222;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
 }
-
 /* Hover highlight effect changing both icon and text simultaneously */
 #highlightIcon:hover {
-  color: #0076ff;          /* Both text and SVG currentColor update */
-  background-color: #f0f7ff; /* Highlight background */
+  color: #0077ffa5;          /* Both text and SVG currentColor update */
+  background-color: #dec2c6; /* Highlight background */
   border-radius: 4px;
+}
+.qhHighlight {
+  background-color: #cdc8e3; /* soft pink */
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+#qhHighlight {
+  position: absolute;
+  z-index: 999999; /* needs to sit above whatever the page itself uses */
+  background: #222;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
 }

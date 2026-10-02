@@ -3,5 +3,6 @@
   "name": "Highlighter",
   "version": "1.0.0",
   "description": "Highlights",
-  "permissions": ["storage", "activeTab", "scripting"]
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["<all_urls>"]
 } 

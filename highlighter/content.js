@@ -62,7 +62,7 @@ function highlightSelection(range) {
   }
 
   span.addEventListener('click', () => removeHighlight(span)); // click an existing highlight to remove it
-  saveHighlight(span.textContent, span.dataset.qhId);
+  //saveHighlight(span.textContent, span.dataset.qhId);
 }
 //When you highlight text, highlightSelection wraps it like this: <p>The quick <span class="qhHighlight">brown fox</span> jumps.</p>
 //"brown fox" now lives inside that span — it's the span's child text node. If you just did span.remove(), you'd delete the span and everything inside it
@@ -72,5 +72,5 @@ function removeHighlight(span) {//goal is to remove the highlight without losing
   parent.removeChild(span); // remove the now-empty wrapper
   //deleteHighlight(span.dataset.qhId)- Only after the DOM is cleaned up does it tell chrome.storage to forget this highlight, using the UUID that was stamped onto the span back when it was created. This is what makes the removal persistent — without this, reloading the page would call restoreHighlights()
 }
-saveHighlight(span.textContent, span.dataset.qhId);
-deleteHighlight(span.dataset.qhId);
+//saveHighlight(span.textContent, span.dataset.qhId) {continue;}
+//deleteHighlight(span.dataset.qhId){continue;}

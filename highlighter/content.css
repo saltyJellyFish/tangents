@@ -1,0 +1,15 @@
+#highlightIcon {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Space between icon and text */
+  padding: 4px 8px;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+/* Hover highlight effect changing both icon and text simultaneously */
+#highlightIcon:hover {
+  color: #0076ff;          /* Both text and SVG currentColor update */
+  background-color: #f0f7ff; /* Highlight background */
+  border-radius: 4px;
+}

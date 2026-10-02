@@ -30,7 +30,7 @@ function showFloatingButton(selection) {
   const highlightBtn = document.createElement('button'); //creates an html button element. same idea as writing <button></button> in html
 
   const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"> <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`;
-  highlightBtn.id = 'highlight-btn';
+  highlightBtn.id = 'highlightIcon';
   highlightBtn.innerHTML = svgIcon;
   highlightBtn.style.top = `${window.scrollY + rect.top - 36}px`; //How far from the top of the webpage should the button be?
   highlightBtn.style.left = `${window.scrollX + rect.left}px`;
@@ -44,7 +44,7 @@ function showFloatingButton(selection) {
 }
 
 function removeFloatingButton() {
-  const existing = document.getElementById('highlight-btn'); //searches the webpage for element id
+  const existing = document.getElementById('highlightIcon'); //searches the webpage for element id
   if (existing) existing.remove();
 }
 function highlightSelection(range) {
@@ -72,3 +72,5 @@ function removeHighlight(span) {//goal is to remove the highlight without losing
   parent.removeChild(span); // remove the now-empty wrapper
   //deleteHighlight(span.dataset.qhId)- Only after the DOM is cleaned up does it tell chrome.storage to forget this highlight, using the UUID that was stamped onto the span back when it was created. This is what makes the removal persistent — without this, reloading the page would call restoreHighlights()
 }
+saveHighlight(span.textContent, span.dataset.qhId);
+deleteHighlight(span.dataset.qhId);

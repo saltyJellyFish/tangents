@@ -159,8 +159,7 @@ ringWrap.addEventListener('wheel', (e) => {
   window.electronAPI.clearProgress();
 }, { passive: false }); // passive:false is required for preventDefault() to actually work on a wheel event
 
-// Task queue... Flat array of { id, text, subtasks: [{text, done}], done }
-// No persistence: lives in memory only
+// Task queue... Flat array of { id, text, subtasks: [{text, done}], done }. No persistence: lives in memory only
 // "active task" is not just queue[0], it's the first task that ISN'T done yet
 
 let queue = [];

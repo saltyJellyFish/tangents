@@ -1,0 +1,1 @@
+//background script that listens for/ responds to events, such as when the extension is installed or when a user clicks on the extension icon. 

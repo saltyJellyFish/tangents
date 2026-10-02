@@ -23,6 +23,11 @@
 ==> mouseup/mousedown- mouse pressed/released
 ==> mouseover/ mouseout- pointer enters or leaves an element's boundaries
 
+-"run_at": "document_idle" waits until page's initial DOM is ready before running script so it doesn't restore highlights prematurely 
+
+
+
+
 
 
 

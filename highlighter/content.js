@@ -1,4 +1,4 @@
-//content.js- content script that detects text selection and creates a highlight button
+//content.js- content script that detects text selection and creates a highlight button (logic that can interact directly with the webpage's DOM)
 /*FLOW:
 User drags over text    ↓
 Mouse is released → "mouseup" event fires    ↓

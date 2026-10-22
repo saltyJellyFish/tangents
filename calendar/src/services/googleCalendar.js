@@ -32,3 +32,28 @@ export function connectGoogleCalendar() {
         client.requestAccessToken()
     })
 }
+
+export async function getCalendarEvents(accessToken) {
+    const params = new URLSearchParams({
+        timeMin: new Date().toISOString(),
+        maxResults: '10',
+        singleEvents: 'true',
+        orderBy: 'startTime',
+    })
+
+    const response = await fetch(
+        `https://www.googleapis.com/calendar/v3/calendars/primary/events?${params}`,
+        {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        }
+    )
+
+    if (!response.ok) {
+        throw new Error(`Failed to load events (${response.status})`)
+    }
+
+    const data = await response.json()
+    return data.items ?? []
+}

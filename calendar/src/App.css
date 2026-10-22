@@ -32,3 +32,39 @@
     .event-card p {
         margin: 0;
     }
+
+.calendar h2 {
+    margin-bottom: 24px;
+}
+
+.month-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.weekday {
+    padding: 12px;
+    text-align: center;
+    font-weight: 600;
+}   
+
+.calendar-day {
+    min-height: 120px;
+    min-width: 0;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.today {
+    background: #2563eb;
+    color: white;
+    border-radius: 50%;
+    padding: 4px 8px;
+}
+
+.calendar-day .event-card {
+    padding: 6px;
+    margin-top: 6px;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
